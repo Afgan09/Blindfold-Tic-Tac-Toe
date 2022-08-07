@@ -31,7 +31,7 @@ def doesWin(moveList):
     return isWinning
 
 
-def BotDefend(PlayerList, MovesAval, HumanMoves):
+def BotMoves(PlayerList, MovesAval, HumanMoves):
 
     if 'a1' in PlayerList and 'b2' in PlayerList and 'c3' in MovesAval:
         return "c3"
@@ -105,12 +105,19 @@ while True:
         moveHumanList = []
         listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         restart = False
-        if random.randint(1, 3) == 2:
-            moveBot = random.choice(listMoves)
-            moveBotList.append(moveBot)
-            i = listMoves.index(moveBot)
-            listMoves[i] = "taken"
-            print(moveBot)
+        if random.randint(1, 2) == 2:
+            if random.randint(1,3)==1:
+                moveBot = random.choice(listMoves)
+                moveBotList.append(moveBot)
+                i = listMoves.index(moveBot)
+                listMoves[i] = "taken"
+                print(moveBot)
+            else:
+                moveBot="b2"
+                moveBotList.append(moveBot)
+                i = listMoves.index(moveBot)
+                listMoves[i] = "taken"
+                print(moveBot)
     moveHuman = input("Move: ")
     if moveHuman not in listMoves:
         print("This move was already played! You lose!")
@@ -134,13 +141,15 @@ while True:
 
     #  Bot AI
 
-    moveBot = BotDefend(moveHumanList, listMoves, moveHuman)
+    moveBot = BotMoves(moveBotList, listMoves, moveBot)
     if moveBot == "":
-        while True:
-            moveBot = random.choice(listMoves)
-            if moveBot=="taken":
-                continue
-            break
+        moveBot = BotMoves(moveHumanList, listMoves, moveHuman)
+        if moveBot=="":
+            while True:
+                moveBot = random.choice(listMoves)
+                if moveBot=="taken":
+                    continue
+                break
         moveBotList.append(moveBot)
         i = listMoves.index(moveBot)
         listMoves[i] = "taken"
