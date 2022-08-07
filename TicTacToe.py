@@ -7,7 +7,7 @@ moveBotList = []
 moveHumanList = []
 listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
 randomChance = ""
-restart = False
+restart = True
 
 
 def doesWin(moveList):
@@ -31,7 +31,7 @@ def doesWin(moveList):
     return isWinning
 
 
-def BotDefend(PlayerList, MovesAval,HumanMoves):
+def BotDefend(PlayerList, MovesAval, HumanMoves):
 
     if 'a1' in PlayerList and 'b2' in PlayerList and 'c3' in MovesAval:
         return "c3"
@@ -47,7 +47,7 @@ def BotDefend(PlayerList, MovesAval,HumanMoves):
     if 'a3' in PlayerList and 'c1' in PlayerList and 'b2' in MovesAval:
         return "b2"
 
-    if HumanMoves.find("a"):
+    if HumanMoves.find("a")!=-1:
         if 'a1' in PlayerList and 'a2' in PlayerList and 'a3' in MovesAval:
             return 'a3'
         if 'a1' in PlayerList and 'a3' in PlayerList and 'a2' in MovesAval:
@@ -55,7 +55,7 @@ def BotDefend(PlayerList, MovesAval,HumanMoves):
         if 'a2' in PlayerList and 'a3' in PlayerList and 'a1' in MovesAval:
             return "a1"
 
-    if HumanMoves.find("b"):
+    if HumanMoves.find("b")!=-1:
         if 'b1' in PlayerList and 'b2' in PlayerList and 'b3' in MovesAval:
             return 'b3'
         if 'b1' in PlayerList and 'b3' in PlayerList and 'b2' in MovesAval:
@@ -63,7 +63,7 @@ def BotDefend(PlayerList, MovesAval,HumanMoves):
         if 'b2' in PlayerList and 'b3' in PlayerList and 'b1' in MovesAval:
             return "b1"
 
-    if HumanMoves.find("c"):
+    if HumanMoves.find("c")!=-1:
         if 'c1' in PlayerList and 'c2' in PlayerList and 'c3' in MovesAval:
             return 'c3'
         if 'c1' in PlayerList and 'c3' in PlayerList and 'c2' in MovesAval:
@@ -71,7 +71,7 @@ def BotDefend(PlayerList, MovesAval,HumanMoves):
         if 'c2' in PlayerList and 'c3' in PlayerList and 'c1' in MovesAval:
             return "c1"
 
-    if HumanMoves.find("1"):
+    if HumanMoves.find("1")!=-1:
         if 'a1' in PlayerList and 'b1' in PlayerList and 'c1' in MovesAval:
             return "c1"
         if 'a1' in PlayerList and 'c1' in PlayerList and 'b1' in MovesAval:
@@ -79,7 +79,7 @@ def BotDefend(PlayerList, MovesAval,HumanMoves):
         if 'c1' in PlayerList and 'b1' in PlayerList and 'a1' in MovesAval:
             return "a1"
 
-    if HumanMoves.find("2"):
+    if HumanMoves.find("2")!=-1:
         if 'a2' in PlayerList and 'b2' in PlayerList and 'c2' in MovesAval:
             return "c2"
         if 'a1' in PlayerList and 'c2' in PlayerList and 'b2' in MovesAval:
@@ -87,7 +87,7 @@ def BotDefend(PlayerList, MovesAval,HumanMoves):
         if 'c1' in PlayerList and 'b2' in PlayerList and 'a2' in MovesAval:
             return "a2"
 
-    if HumanMoves.find("3"):
+    if HumanMoves.find("3")!=-1:
         if 'a3' in PlayerList and 'b3' in PlayerList and 'c3' in MovesAval:
             return "c3"
         if 'a3' in PlayerList and 'c3' in PlayerList and 'b3' in MovesAval:
@@ -105,12 +105,12 @@ while True:
         moveHumanList = []
         listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         restart = False
-    if random.randint(1, 2) == 2 and len(listMoves) == 9:
-        moveBot = random.choice(listMoves)
-        moveBotList.append(moveBot)
-        i = listMoves.index(moveBot)
-        listMoves[i] = "taken"
-        print(moveBot)
+        if random.randint(1, 3) == 2:
+            moveBot = random.choice(listMoves)
+            moveBotList.append(moveBot)
+            i = listMoves.index(moveBot)
+            listMoves[i] = "taken"
+            print(moveBot)
     moveHuman = input("Move: ")
     if moveHuman not in listMoves:
         print("This move was already played! You lose!")
@@ -135,34 +135,21 @@ while True:
 
     moveBot = BotDefend(moveHumanList, listMoves, moveHuman)
     if moveBot == "":
-        if moveHuman.find("a") != -1:
-            while True:
-                randomChance = random.choice(listMoves[0:5])
-                if randomChance == "taken":
-                    continue
-                else:
-                    moveBot = randomChance
-                    break
-        elif moveHuman.find("b") != -1:
-            while True:
-                randomChance = random.choice(listMoves[0:9])
-                if randomChance == "taken":
-                    continue
-                else:
-                    moveBot = randomChance
-                    break
-        elif moveHuman.find("c") != -1:
-            while True:
-                randomChance = random.choice(listMoves[4:9])
-                if randomChance == "taken":
-                    continue
-                else:
-                    moveBot = randomChance
-                    break
-    moveBotList.append(moveBot)
-    i = listMoves.index(moveBot)
-    listMoves[i] = "taken"
-    print(moveBot)
+        while True:
+            moveBot = random.choice(listMoves)
+            if moveBot=="taken":
+                continue
+            break
+        moveBotList.append(moveBot)
+        i = listMoves.index(moveBot)
+        listMoves[i] = "taken"
+        print(moveBot)
+        continue
+    else:
+        moveBotList.append(moveBot)
+        i = listMoves.index(moveBot)
+        listMoves[i] = "taken"
+        print(moveBot)
 
     # is bot winning
     if doesWin(moveBotList) is True:
