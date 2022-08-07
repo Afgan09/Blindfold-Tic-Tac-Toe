@@ -50,15 +50,9 @@ while True:
         continue
     if countMoves==5:
         break
-
-    while True:
-        moveBot=random.choice(listMoves)
-        if moveBot not in listMoves:
-            continue
-        else:
-            moveBotList.append(moveBot)
-            listMoves.remove(moveBot)
-            break
+    moveBot=random.choice(listMoves)
+    moveBotList.append(moveBot)
+    listMoves.remove(moveBot)
     print(moveBot)
     if doesWin(moveBotList) is True:
         print("Bot wins!")
