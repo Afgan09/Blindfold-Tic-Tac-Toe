@@ -115,6 +115,7 @@ while True:
     if moveHuman not in listMoves:
         print("This move was already played! You lose!")
         input("Press ENTER to restart")
+        restart=True
         continue
 
     moveHumanList.append(moveHuman)
