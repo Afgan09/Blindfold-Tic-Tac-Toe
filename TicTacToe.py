@@ -26,6 +26,11 @@ def doesWin(moveList):
     return isWinning
 
 while True:
+    if random.randint(1,3)==2 and len(listMoves)==9:
+        moveBot = random.choice(listMoves)
+        moveBotList.append(moveBot)
+        listMoves.remove(moveBot)
+        print(moveBot)
     moveHuman=input("Move: ")
     if moveHuman not in listMoves:
         print("That move was already played! You lose!")
@@ -48,8 +53,15 @@ while True:
         countMoves = 0
         listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         continue
-    if countMoves==5:
-        break
+    if not listMoves:
+        print("Draw!")
+        input("Press ENTER to restart")
+        clear()
+        moveBotList = []
+        moveHumanList = []
+        countMoves = 0
+        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+        continue
     moveBot=random.choice(listMoves)
     moveBotList.append(moveBot)
     listMoves.remove(moveBot)
@@ -64,5 +76,3 @@ while True:
         listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         continue
     continue
-
-
