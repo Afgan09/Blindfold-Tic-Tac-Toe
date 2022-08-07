@@ -3,7 +3,6 @@ moveBotList = []
 moveHumanList = []
 countMoves = 0
 listMoves=["a1", "a2", "a3", "b1", "b2", "b3", "c1","c2","c3"]
-
 def doesWin(moveList):
     isWinning=False
     if ('a1' and 'a2') in moveList:
@@ -36,13 +35,23 @@ while True:
     moveHuman=input("Move: ")
     if moveHuman not in listMoves:
         print("That move was already played! You lose!")
-        break
+        input("Press ENTER to restart")
+        moveBotList = []
+        moveHumanList = []
+        countMoves = 0
+        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+        continue
     moveHumanList.append(moveHuman)
     listMoves.remove(moveHuman)
     countMoves+=1
     if doesWin(moveHumanList) is True:
         print("You win!")
-        break
+        input("Press ENTER to restart")
+        moveBotList = []
+        moveHumanList = []
+        countMoves = 0
+        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+        continue
     if countMoves==5:
         break
 
@@ -57,7 +66,12 @@ while True:
     print(moveBot)
     if doesWin(moveBotList) is True:
         print("Bot wins!")
-        break
+        input("Press ENTER to restart")
+        moveBotList = []
+        moveHumanList = []
+        countMoves = 0
+        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+        continue
     continue
 
 
