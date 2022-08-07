@@ -4,33 +4,25 @@ clear = lambda: os.system('cls')
 moveBotList = []
 moveHumanList = []
 countMoves = 0
-listMoves=["a1", "a2", "a3", "b1", "b2", "b3", "c1","c2","c3"]
+listMoves= ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
 def doesWin(moveList):
     isWinning=False
-    if ('a1' and 'a2') in moveList:
-        if 'a3' in moveList:
-            isWinning=True
-    elif ('b1' and 'b2') in moveList:
-        if 'b3' in moveList:
-            isWinning=True
-    elif ('c1' and 'c2') in moveList:
-        if 'c3' in moveList:
-            isWinning=True
-    elif ('a1' and 'b2') in moveList:
-        if 'c3' in moveList:
-            isWinning=True
-    elif ('a3' and 'b2') in moveList:
-        if 'c1' in moveList:
-            isWinning=True
-    elif ('a1' and 'b1') in moveList:
-        if 'c1' in moveList:
-            isWinning=True
-    elif ('a2' and 'b2') in moveList:
-        if 'c2' in moveList:
-            isWinning=True
-    elif ('a3' and 'b3') in moveList:
-        if 'c3' in moveList:
-            isWinning=True
+    if 'a1' in moveList and 'a2' in moveList and 'a3' in moveList:
+        isWinning=True
+    if 'b1' in moveList and 'b2' in moveList and 'b3' in moveList:
+        isWinning=True
+    if 'c1' in moveList and 'c2' in moveList and 'c3' in moveList:
+        isWinning=True
+    if 'a1' in moveList and 'b2' in moveList and 'c3' in moveList:
+        isWinning=True
+    if 'a3' in moveList and 'b2' in moveList and 'c1' in moveList:
+        isWinning=True
+    if 'a1' in moveList and 'b1' in moveList and 'c1' in moveList:
+        isWinning=True
+    if 'a2' in moveList and 'b2' in moveList and 'c2' in moveList:
+        isWinning=True
+    if 'a3' in moveList and 'b3' in moveList and 'c3' in moveList:
+        isWinning=True
     return isWinning
 
 while True:
