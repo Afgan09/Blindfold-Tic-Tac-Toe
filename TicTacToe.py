@@ -6,6 +6,7 @@ moveBotList = []
 moveHumanList = []
 listMoves= ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
 randomChance=""
+restart=False
 def doesWin(moveList):
     isWinning=False
     if 'a1' in moveList and 'a2' in moveList and 'a3' in moveList:
@@ -28,6 +29,12 @@ def doesWin(moveList):
 
 #Start of game
 while True:
+    if restart==True:
+        clear()
+        moveBotList = []
+        moveHumanList = []
+        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+        restart=False
     if random.randint(1,2)==2 and len(listMoves)==9:
         moveBot = random.choice(listMoves)
         moveBotList.append(moveBot)
@@ -38,10 +45,6 @@ while True:
     if moveHuman not in listMoves:
         print("This move was already played! You lose!")
         input("Press ENTER to restart")
-        clear()
-        moveBotList = []
-        moveHumanList = []
-        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         continue
 
     moveHumanList.append(moveHuman)
@@ -49,19 +52,12 @@ while True:
     listMoves[i] = "taken"
     if doesWin(moveHumanList) is True:
         print("You win!")
-        input("Press ENTER to restart")
-        clear()
-        moveBotList = []
-        moveHumanList = []
-        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+        restart=True
         continue
     if listMoves.count("taken")==9:
         print("Draw!")
         input("Press ENTER to restart")
-        clear()
-        moveBotList = []
-        moveHumanList = []
-        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+        restart=True
         continue
 
        #  Bot AI
@@ -98,9 +94,6 @@ while True:
     if doesWin(moveBotList) is True:
         print("Bot wins!")
         input("Press ENTER to restart")
-        clear()
-        moveBotList = []
-        moveHumanList = []
-        listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+        restart = True
         continue
     continue
