@@ -1,10 +1,11 @@
 import random
 import os
 clear = lambda: os.system('cls')
+moveBot=""
 moveBotList = []
 moveHumanList = []
-countMoves = 0
 listMoves= ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
+randomChance=""
 def doesWin(moveList):
     isWinning=False
     if 'a1' in moveList and 'a2' in moveList and 'a3' in moveList:
@@ -25,54 +26,81 @@ def doesWin(moveList):
         isWinning=True
     return isWinning
 
+#Start of game
 while True:
-    if random.randint(1,3)==2 and len(listMoves)==9:
+    if random.randint(1,2)==2 and len(listMoves)==9:
         moveBot = random.choice(listMoves)
         moveBotList.append(moveBot)
-        listMoves.remove(moveBot)
+        i = listMoves.index(moveBot)
+        listMoves[i] = "taken"
         print(moveBot)
     moveHuman=input("Move: ")
     if moveHuman not in listMoves:
-        print("That move was already played! You lose!")
+        print("This move was already played! You lose!")
         input("Press ENTER to restart")
         clear()
         moveBotList = []
         moveHumanList = []
-        countMoves = 0
         listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         continue
+
     moveHumanList.append(moveHuman)
-    listMoves.remove(moveHuman)
-    countMoves+=1
+    i=listMoves.index(moveHuman)
+    listMoves[i] = "taken"
     if doesWin(moveHumanList) is True:
         print("You win!")
         input("Press ENTER to restart")
         clear()
         moveBotList = []
         moveHumanList = []
-        countMoves = 0
         listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         continue
-    if not listMoves:
+    if listMoves.count("taken")==9:
         print("Draw!")
         input("Press ENTER to restart")
         clear()
         moveBotList = []
         moveHumanList = []
-        countMoves = 0
         listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         continue
-    moveBot=random.choice(listMoves)
+
+       #  Bot AI
+
+    if moveHuman.find("a")!=-1:
+        while True:
+            randomChance=random.choice(listMoves[0:5])
+            if randomChance=="taken":
+                continue
+            else:
+                moveBot=randomChance
+                break
+    elif moveHuman.find("b")!=-1:
+        while True:
+            randomChance=random.choice(listMoves[0:9])
+            if randomChance=="taken":
+                continue
+            else:
+                moveBot=randomChance
+                break
+    elif moveHuman.find("c")!=-1:
+        while True:
+            randomChance=random.choice(listMoves[4:9])
+            if randomChance=="taken":
+                continue
+            else:
+                moveBot=randomChance
+                break
     moveBotList.append(moveBot)
     listMoves.remove(moveBot)
     print(moveBot)
+
+# is bot winning
     if doesWin(moveBotList) is True:
         print("Bot wins!")
         input("Press ENTER to restart")
         clear()
         moveBotList = []
         moveHumanList = []
-        countMoves = 0
         listMoves = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
         continue
     continue
