@@ -1,4 +1,6 @@
 import random
+import os
+clear = lambda: os.system('cls')
 moveBotList = []
 moveHumanList = []
 countMoves = 0
@@ -36,6 +38,7 @@ while True:
     if moveHuman not in listMoves:
         print("That move was already played! You lose!")
         input("Press ENTER to restart")
+        clear()
         moveBotList = []
         moveHumanList = []
         countMoves = 0
@@ -47,6 +50,7 @@ while True:
     if doesWin(moveHumanList) is True:
         print("You win!")
         input("Press ENTER to restart")
+        clear()
         moveBotList = []
         moveHumanList = []
         countMoves = 0
@@ -67,6 +71,7 @@ while True:
     if doesWin(moveBotList) is True:
         print("Bot wins!")
         input("Press ENTER to restart")
+        clear()
         moveBotList = []
         moveHumanList = []
         countMoves = 0
